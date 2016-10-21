@@ -50,7 +50,9 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		int main = this.getResources().getIdentifier("main_select", "layout", this.getPackageName());
+		int main = this.getResources().getIdentifier("main", "layout", this.getPackageName());
+		int main_folder = this.getResources().getIdentifier("main_folder", "layout", this.getPackageName());
+
 		int internal = this.getResources().getIdentifier("internal", "string", this.getPackageName());
 
 		int drawer_layout = this.getResources().getIdentifier("drawer_layout", "id", this.getPackageName());
@@ -77,20 +79,22 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
     //  });
 
 
-	    getActionBar().setDisplayHomeAsUpEnabled(true);
-	    getActionBar().setHomeButtonEnabled(true);
+	  getActionBar().setDisplayHomeAsUpEnabled(true);
+	  getActionBar().setHomeButtonEnabled(true);
+
 		_context = this;
+
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			if (extras
-					.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS) != null) {
-				extensions = extras
-						.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS);
+			if (extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS) != null) {
+				extensions = extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS);
+				if(extensions.contains(Constants.FOLDER)){
+					setContentView(main_folder);
+				}
 				fileFilter = new FileFilter() {
 					@Override
 					public boolean accept(File pathname) {
-						return ((pathname.isDirectory()) || (pathname.getName()
-								.contains(".") ? extensions.contains(pathname
+						return ((pathname.isDirectory()) || (pathname.getName().contains(".") ? extensions.contains(pathname
 								.getName().substring(
 										pathname.getName().lastIndexOf(".")).toLowerCase())
 								: false));
@@ -98,6 +102,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 				};
 			}
 		}
+
 		currentFolder = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath());
 

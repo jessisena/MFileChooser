@@ -111,7 +111,7 @@
         <source-file src="src/android/mfilechooser/res/layout/drawer_list_item.xml" target-dir="res/layout" />
         <source-file src="src/android/mfilechooser/res/layout/file_row.xml" target-dir="res/layout" />
         <source-file src="src/android/mfilechooser/res/layout/main.xml" target-dir="res/layout" />
-        <source-file src="src/android/mfilechooser/res/layout/main_select.xml" target-dir="res/layout" />
+        <source-file src="src/android/mfilechooser/res/layout/main_folder.xml" target-dir="res/layout" />
 
         <source-file src="src/android/mfilechooser/res/values/colors.xml" target-dir="res/values" />
         <source-file src="src/android/mfilechooser/res/values/styles.xml" target-dir="res/values" />
