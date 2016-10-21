@@ -69,7 +69,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
              // Perform action on click
 						 Intent intent = new Intent();
 						 intent.putExtra(Constants.KEY_FILE_SELECTED,
-								 File.getAbsolutePath());
+								 currentFolder.getAbsolutePath());
 						 setResult(Activity.RESULT_OK, intent);
 						 Log.i("FILE CHOOSER", "result ok");
 						 finish();
