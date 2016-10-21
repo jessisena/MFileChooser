@@ -29,6 +29,7 @@
             <string name="category">Category</string>
             <string name="internal">Internal</string>
             <string name="external">External</string>
+            <string name="select">Select</string>
         </config-file>
         <config-file target="res/values/colors.xml" parent="/*">
 		    <color name="redcolor">#FF0000</color>
