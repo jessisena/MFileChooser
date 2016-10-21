@@ -67,12 +67,17 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		if (extras != null) {
 			if (extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS) != null) {
 				extensions = extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS);
+
+				for(int i=0; i<extensions.size();i++){
+					Log.i("FILE CHOOSER", "Extensions: "+ extensions.get(i));
+				}
+
 				if(extensions.contains(Constants.FOLDER)){
 					Log.i("FILE CHOOSER", "Contains folder!");
 					setContentView(main_folder);
 				}else{
 					setContentView(main);
-					Log.i("FILE CHOOSER", "View MAIN");
+					Log.i("FILE CHOOSER", "extensions not contain folder: View MAIN");
 				}
 				fileFilter = new FileFilter() {
 					@Override
@@ -85,11 +90,11 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 				};
 			}else{
 				setContentView(main);
-				Log.i("FILE CHOOSER", "View MAIN");
+				Log.i("FILE CHOOSER", "extras.getStringArrayList null, View MAIN");
 			}
 		}else{
 			setContentView(main);
-			Log.i("FILE CHOOSER", "View MAIN");
+			Log.i("FILE CHOOSER", "extras null, View MAIN");
 		}
 
 		// if(extensions != null && extensions.contains(Constants.FOLDER)){
