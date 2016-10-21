@@ -26,41 +26,40 @@ public class MFileChooser extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         exts = new ArrayList<String>();
-       
+
         int count = args.length();
-        
+
         for(int i = 0;i<count;i++)
         {
         	exts.add(args.getString(i).toLowerCase());
         }
-  	
+
 		if (action.equals(ACTION_OPEN)) {
             chooseFile(callbackContext,exts);
             return true;
-        }	 
-        
+        }
+
         return false;
 	}
-	
+
     public void chooseFile(CallbackContext callbackContext, ArrayList<String> ext) {
 
         // type and title should be configurable
     	Context context=this.cordova.getActivity().getApplicationContext();
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setClass(context,FileChooserActivity.class);
-        
-        if(ext.size()>0)
-        {
+
+        if(ext.size()>0){
         	intent.putStringArrayListExtra(Constants.KEY_FILTER_FILES_EXTENSIONS, ext);
         }
         cordova.startActivityForResult(this, intent, PICK_FILE_REQUEST);
-        
+
         PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
         pluginResult.setKeepCallback(true);
         callback = callbackContext;
         callbackContext.sendPluginResult(pluginResult);
     }
-    
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
