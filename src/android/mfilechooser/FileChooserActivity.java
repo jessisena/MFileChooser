@@ -72,7 +72,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 					Log.i("FILE CHOOSER", "Extensions: "+ extensions.get(i));
 				}
 
-				if(extensions.contains(Constants.FOLDER)){
+				if(extensions.contains(Constants.FOLDER.toLowerCase())){
 					Log.i("FILE CHOOSER", "Contains folder!");
 					setContentView(main_folder);
 				}else{
