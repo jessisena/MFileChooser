@@ -30,6 +30,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import android.widget.Button;
+
 public class FileChooserActivity extends ListActivity implements OnItemClickListener {
 
 	private File currentFolder;
