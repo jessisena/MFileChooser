@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/drawer_layout"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            ></ListView>
+
+        <ListView
+            android:id="@+id/left_drawer"
+            android:background = "#2c2c2c"
+            android:layout_width = "240dp"
+            android:layout_height = "match_parent"
+            android:layout_gravity = "left"
+            android:choiceMode = "singleChoice"
+            android:divider = "@drawable/divider_line_grey"
+            />
+    </android.support.v4.widget.DrawerLayout>
+
+
+    <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:paddingLeft="16dp"
+     android:paddingRight="16dp" >
+     <Button
+         android:id="@+id/button_select"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/drawer_layout"
+         android:layout_alignParentRight="true"
+         android:text="@string/select"
+         android:onClick="selectPath" />
+ </RelativeLayout>
+ 
+</RelativeLayout>
+<!-- <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
@@ -55,4 +102,4 @@
         android:onClick="selectPath" />
 </RelativeLayout> -->
 
-</android.support.v4.widget.DrawerLayout>
+</android.support.v4.widget.DrawerLayout> -->
