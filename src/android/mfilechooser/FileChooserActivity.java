@@ -47,10 +47,10 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		int main = this.getResources().getIdentifier("main", "layout", this.getPackageName());
 		int internal = this.getResources().getIdentifier("internal", "string", this.getPackageName());
-		
+
 		int drawer_layout = this.getResources().getIdentifier("drawer_layout", "id", this.getPackageName());
 		int left_drawer = this.getResources().getIdentifier("left_drawer", "id", this.getPackageName());
 		int drawer_shadow = this.getResources().getIdentifier("drawer_shadow", "drawable", this.getPackageName());
@@ -60,6 +60,20 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		int drawer_close = this.getResources().getIdentifier("drawer_close", "string", this.getPackageName());
 
 		setContentView(main);
+
+		final Button button = (Button) findViewById(R.id.button_select);
+     button.setOnClickListener(new View.OnClickListener() {
+         public void onClick(View v) {
+             // Perform action on click
+						 Intent intent = new Intent();
+						 intent.putExtra(Constants.KEY_FILE_SELECTED,
+								 File.getAbsolutePath());
+						 setResult(Activity.RESULT_OK, intent);
+						 Log.i("FILE CHOOSER", "result ok");
+						 finish();
+         }
+     });
+
 
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
 	    getActionBar().setHomeButtonEnabled(true);
@@ -84,11 +98,11 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		}
 		currentFolder = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath());
-		
+
 		currentCategory = new Category();
 		currentCategory.title = getString(internal);
-		currentCategory.path = currentFolder.getAbsolutePath(); 
-				
+		currentCategory.path = currentFolder.getAbsolutePath();
+
 	    mDrawerLayout = (DrawerLayout) findViewById(drawer_layout);
 	    mDrawerLayout.setDrawerShadow(drawer_shadow,GravityCompat.START);
  		mDrawerList = (ListView) findViewById(left_drawer);
@@ -98,41 +112,41 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 	    	 drawer_open, /* "open drawer" description for accessibility */
 	    	 drawer_close /* "close drawer" description for accessibility */
 	    	 ) {
-	    	     public void onDrawerClosed(View view) 
+	    	     public void onDrawerClosed(View view)
 	    	     {
 	    	           // getSupportActionBar().setTitle(mTitle);
 	    	            invalidateOptionsMenu(); // creates call to
 	    	                                            // onPrepareOptionsMenu()
 	    	     }
 
-	    	     public void onDrawerOpened(View drawerView) 
+	    	     public void onDrawerOpened(View drawerView)
 	    	     {
 	    	           // getSupportActionBar().setTitle(mDrawerTitle);
 	    	            invalidateOptionsMenu(); // creates call to
 	    	                                            // onPrepareOptionsMenu()
 	    	     }
 	           };
-	           
+
 	   mDrawerLayout.post(new Runnable() {
 	               @Override
 	               public void run() {
 	                   mDrawerToggle.syncState();
 	               }
 	           });
-	    	     
+
 	    mDrawerLayout.setDrawerListener(mDrawerToggle);
 	  //  ActionBar.
 	    //getSupportActionBar().set
 
 		fill(currentFolder);
 	}
-	  
-	
+
+
     @Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		switch (item.getItemId()) {
-	      case android.R.id.home:	    		
+	      case android.R.id.home:
 	    	  if (mDrawerLayout.isDrawerOpen(mDrawerList)){
 	    		    mDrawerLayout.closeDrawer(mDrawerList);
 	    		} else {
@@ -143,13 +157,13 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 	    			cat0.title = "Internal";
 	    			*/
 	    			_category.add(Utils.getInternalStorage(this));
-	    			
+
 	    			Category catExt = Utils.getExternalStorage(this);
 	    			if(catExt!=null)
 	    			{
 	    				_category.add(catExt);
 	    			}
-	    			
+
 	    		    mDrawerList.setAdapter(new DirectoryAdapter(_context, _category,currentIndex));
 	    		    mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener()
 	    		    {
@@ -162,19 +176,19 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 	    		    		 Category cat = (Category) arg0.getItemAtPosition(arg2);
 	    		    		 currentCategory = cat;
 	    		    		 fill(new File(cat.path));
-	    		    	   
+
 	    		    	     mDrawerLayout.closeDrawer(mDrawerList);
 	    		    	     adapter.notifyDataSetChanged();
 	    		    	}
 	    		    });
-	    		   
+
 
 	    		    mDrawerLayout.openDrawer(mDrawerList);
 	    		}
 			  return true;
 		  default:
 			  return true;
-		}	
+		}
 	}
 
 	/*public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -186,7 +200,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 				fill(currentFolder);
 			} else {
 				Log.i("FILE CHOOSER", "canceled");
-				setResult(Activity.RESULT_CANCELED);				
+				setResult(Activity.RESULT_CANCELED);
 				finish();
 			}
 			return true;
@@ -194,8 +208,8 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		return super.onKeyDown(keyCode, event);
 	}
 */
-   
-    
+
+
 	private void fill(File f) {
 		File[] folders = null;
 		if (fileFilter != null)
@@ -211,7 +225,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		{
 		    this.setTitle(currentCategory.title + ": " + f.getName());
 		}
-		
+
 		int fileSize = this.getResources().getIdentifier("fileSize", "string", _context.getPackageName());
 		List<FileInfo> dirs = new ArrayList<FileInfo>();
 		List<FileInfo> files = new ArrayList<FileInfo>();
@@ -236,7 +250,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		Collections.sort(dirs);
 		Collections.sort(files);
 		dirs.addAll(files);
-		
+
 		/*if (!f.getName().equalsIgnoreCase(
 				Environment.getExternalStorageDirectory().getName())) {
 			if (f.getParentFile() != null)
@@ -245,7 +259,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 						Constants.PARENT_FOLDER, f.getParent(),
 						false, true));
 		}*/
-		
+
 		if (!f.getAbsolutePath().equalsIgnoreCase(
 				currentCategory.path)) {
 			if (f.getParentFile() != null)
@@ -254,16 +268,16 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 						Constants.PARENT_FOLDER, f.getParent(),
 						false, true));
 		}
-		
+
 		int file_row = this.getResources().getIdentifier("file_row", "layout", _context.getPackageName());
-		
+
 		fileArrayListAdapter = new FileArrayAdapter(FileChooserActivity.this,
 				file_row, dirs);
-		
+
 		//ListView lv = (ListView)findViewById(R.id.list);
 		//lv.setOnItemClickListener(this);
 		//lv.setAdapter(fileArrayListAdapter);
-		
+
 		this.setListAdapter(fileArrayListAdapter);
 	}
 
@@ -307,7 +321,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 			finish();
 		}
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 	   Log.d("CDA", "onBackPressed Called");
