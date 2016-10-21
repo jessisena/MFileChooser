@@ -63,7 +63,32 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		int drawer_open = this.getResources().getIdentifier("drawer_open", "string", this.getPackageName());
 		int drawer_close = this.getResources().getIdentifier("drawer_close", "string", this.getPackageName());
 
-		setContentView(main);
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			if (extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS) != null) {
+				extensions = extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS);
+				// if(extensions.contains(Constants.FOLDER)){
+				// 	setContentView(main_folder);
+				// }
+				fileFilter = new FileFilter() {
+					@Override
+					public boolean accept(File pathname) {
+						return ((pathname.isDirectory()) || (pathname.getName().contains(".") ? extensions.contains(pathname
+								.getName().substring(
+										pathname.getName().lastIndexOf(".")).toLowerCase())
+								: false));
+					}
+				};
+			}
+		}
+
+		if(extensions != null && extensions.contains(Constants.FOLDER)){
+			setContentView(main_folder);
+		}else{
+				setContentView(main);
+		}
+
+
 
 		//  Button button = (Button) findViewById(R.id.button_select);
     //  button.setOnClickListener(new View.OnClickListener() {
@@ -84,24 +109,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 
 		_context = this;
 
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			if (extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS) != null) {
-				extensions = extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS);
-				if(extensions.contains(Constants.FOLDER)){
-					setContentView(main_folder);
-				}
-				fileFilter = new FileFilter() {
-					@Override
-					public boolean accept(File pathname) {
-						return ((pathname.isDirectory()) || (pathname.getName().contains(".") ? extensions.contains(pathname
-								.getName().substring(
-										pathname.getName().lastIndexOf(".")).toLowerCase())
-								: false));
-					}
-				};
-			}
-		}
+
 
 		currentFolder = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath());
