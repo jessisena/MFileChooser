@@ -50,7 +50,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		int main = this.getResources().getIdentifier("main", "layout", this.getPackageName());
+		int main = this.getResources().getIdentifier("main_select", "layout", this.getPackageName());
 		int internal = this.getResources().getIdentifier("internal", "string", this.getPackageName());
 
 		int drawer_layout = this.getResources().getIdentifier("drawer_layout", "id", this.getPackageName());
