@@ -67,9 +67,11 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		if (extras != null) {
 			if (extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS) != null) {
 				extensions = extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS);
-				// if(extensions.contains(Constants.FOLDER)){
-				// 	setContentView(main_folder);
-				// }
+				if(extensions.contains(Constants.FOLDER)){
+					setContentView(main_folder);
+				}else{
+					setContentView(main);
+				}
 				fileFilter = new FileFilter() {
 					@Override
 					public boolean accept(File pathname) {
@@ -79,16 +81,19 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 								: false));
 					}
 				};
-			}
-		}
-
-		if(extensions != null && extensions.contains(Constants.FOLDER)){
-			setContentView(main_folder);
-		}else{
+			}else{
 				setContentView(main);
+			}
+		}else{
+			setContentView(main);
 		}
 
-
+		// if(extensions != null && extensions.contains(Constants.FOLDER)){
+		// 	setContentView(main_folder);
+		// 	Log.i("FILE CHOOSER", "result ok");
+		// }else{
+		// 	setContentView(main);
+		// }
 
 		//  Button button = (Button) findViewById(R.id.button_select);
     //  button.setOnClickListener(new View.OnClickListener() {
@@ -109,11 +114,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 
 		_context = this;
 
-
-
-		currentFolder = new File(Environment.getExternalStorageDirectory()
-				.getAbsolutePath());
-
+		currentFolder = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
 		currentCategory = new Category();
 		currentCategory.title = getString(internal);
 		currentCategory.path = currentFolder.getAbsolutePath();
