@@ -32,6 +32,7 @@
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:paddingLeft="16dp"
+     android:paddingBottom="16dp"
      android:paddingRight="16dp" >
      <Button
          android:id="@+id/button_select"
@@ -43,6 +44,8 @@
          android:textColor="@android:color/white"
          android:background= "@color/blue"
          android:text="@string/select"
+         android:paddingLeft="10dp"
+         android:paddingRight="10dp"
          android:onClick="selectPath" />
  </RelativeLayout>
 
