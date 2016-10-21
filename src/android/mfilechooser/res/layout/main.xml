@@ -24,22 +24,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-        <LinearLayout
-          android:id="@+id/layout_button_select"
-           xmlns:android="http://schemas.android.com/apk/res/android"
-           xmlns:tools="http://schemas.android.com/tools"
-           android:orientation="horizontal"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
-               <Button
-                 android:id="@+id/button_select"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/select"
-                 android:onClick="selectPath"/>
-       </LinearLayout>
-        </ListView>
+        ></ListView>
 
     <ListView
         android:id="@+id/left_drawer"
