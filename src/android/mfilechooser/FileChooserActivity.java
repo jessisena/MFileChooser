@@ -63,18 +63,18 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 
 		setContentView(main);
 
-		final Button button = (Button) findViewById(R.id.button_select);
-     button.setOnClickListener(new View.OnClickListener() {
-         public void onClick(View v) {
-             // Perform action on click
-						 Intent intent = new Intent();
-						 intent.putExtra(Constants.KEY_FILE_SELECTED,
-								 currentFolder.getAbsolutePath());
-						 setResult(Activity.RESULT_OK, intent);
-						 Log.i("FILE CHOOSER", "result ok");
-						 finish();
-         }
-     });
+		//  Button button = (Button) findViewById(R.id.button_select);
+    //  button.setOnClickListener(new View.OnClickListener() {
+    //      public void onClick(View v) {
+    //          // Perform action on click
+		// 				 Intent intent = new Intent();
+		// 				 intent.putExtra(Constants.KEY_FILE_SELECTED,
+		// 						 currentFolder.getAbsolutePath());
+		// 				 setResult(Activity.RESULT_OK, intent);
+		// 				 Log.i("FILE CHOOSER", "result ok");
+		// 				 finish();
+    //      }
+    //  });
 
 
 	    getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -141,6 +141,15 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 	    //getSupportActionBar().set
 
 		fill(currentFolder);
+	}
+
+	public void selectPath(View view){
+	    // Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+							 Intent intent = new Intent();
+							 intent.putExtra(Constants.KEY_FILE_SELECTED, currentFolder.getAbsolutePath());
+							 setResult(Activity.RESULT_OK, intent);
+							 Log.i("FILE CHOOSER", "result ok");
+							 finish();
 	}
 
 
