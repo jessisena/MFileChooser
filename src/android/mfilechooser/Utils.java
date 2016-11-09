@@ -52,12 +52,13 @@ public class Utils {
                         return kid2;
                 }else{
                         if(LOG) Log.i("ionic 1", "NO troba path external amb SD....... ->"+kid.getPath());
-                        if ((kid.getName().toLowerCase().indexOf("remote") == -1 && kid.getName().toLowerCase().indexOf("self") == -1)
-                                && kid.getPath().indexOf(f.getPath()) == -1
+                        if ((kid.getName().toLowerCase().indexOf("remote") == -1 && kid.getName().toLowerCase().indexOf("self") == -1
+                                && kid.getPath().indexOf(f.getPath()) == -1)
+
                                 // && kid.canRead()
                                 // && kid.canWrite()
                                 ){
-                                        if(LOG) Log.i("ionic 1", "3.kid.getName(): "+kid.getName());
+                                        if(LOG) Log.i("ionic 1", "3.kid.getName(): "+kid.getPath());
                                         Category kid3 = new Category();
                                         kid3.path = kid.getAbsolutePath();
                                         kid3.title = context.getString(external);
