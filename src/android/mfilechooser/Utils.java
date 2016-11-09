@@ -27,6 +27,9 @@ public class Utils {
 		int external = context.getResources().getIdentifier("external", "string", context.getPackageName());
 
 		File f = new File(getInternalStorage(context).path);
+
+                if(LOG) Log.i("ionic 1", " Internat oficial: "+ f.getPath());
+
                 File mDaddy = new File(f.getParent());
                 int count = getDepth(mDaddy);
 
@@ -39,7 +42,7 @@ public class Utils {
         for (File kid : mDaddy.listFiles())
 
             if ((kid.getName().toLowerCase().indexOf("ext") > -1 || kid.getName().toLowerCase().indexOf("sdcard1") > -1)
-                    && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
+                    && !kid.getPath().equals(f.getPath())
                     && kid.canRead()
                     && kid.canWrite()){
                         if(LOG) Log.i("ionic 1", "1.kid.getName(): "+kid.getName());
@@ -48,9 +51,9 @@ public class Utils {
                     	kid2.title = context.getString(external);
                         return kid2;
                 }else{
-                        if(LOG) Log.i("ionic 1", "NO troba path external amb SD....... ->"+kid.getName());
+                        if(LOG) Log.i("ionic 1", "NO troba path external amb SD....... ->"+kid.getPath());
                         if ((kid.getName().toLowerCase().indexOf("remote") == -1 && kid.getName().toLowerCase().indexOf("self") == -1)
-                                && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
+                                && !kid.getPath().equals(f.getPath())
                                 // && kid.canRead()
                                 // && kid.canWrite()
                                 ){
