@@ -5,7 +5,7 @@ import java.io.File;
 import android.content.Context;
 import android.os.Environment;
 
-import android.util.Log;
+// import android.util.Log;
 
 import com.maginsoft.data.Category;
 
@@ -22,7 +22,7 @@ public class Utils {
 	public static Category getExternalStorage(Context context)
 	{
 
-                if(LOG) Log.i("ionic 1", " getExternalStorage");
+                // if(LOG) Log.i("ionic 1", " getExternalStorage");
 
 		int external = context.getResources().getIdentifier("external", "string", context.getPackageName());
 
@@ -37,18 +37,19 @@ public class Utils {
 
         for (File kid : mDaddy.listFiles())
             if ((kid.getName().toLowerCase().indexOf("ext") > -1 || kid.getName().toLowerCase()
-                    .indexOf("sdcard1") > -1)
+                    .indexOf("sdcard1") > -1 || kid.getName().toLowerCase()
+                            .indexOf("6432") > -1)
                     && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
                     && kid.canRead()
                     && kid.canWrite()) {
 
-                if(LOG) Log.i("ionic 1", "1.kid.getName(): "+kid.getName());
+                // if(LOG) Log.i("ionic 1", "1.kid.getName(): "+kid.getName());
             	Category kid2 = new Category();
             	kid2.path = kid.getAbsolutePath();
             	kid2.title = context.getString(external);
                 return kid2;
         }else{
-                if(LOG) Log.i("ionic 1", "2.kid.getName(): "+kid.getName());
+                // if(LOG) Log.i("ionic 1", "2.kid.getName(): "+kid.getName());
         }
 
         if (new File("/Removable").exists())
