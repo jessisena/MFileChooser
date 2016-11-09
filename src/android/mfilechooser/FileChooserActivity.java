@@ -51,7 +51,10 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		super.onCreate(savedInstanceState);
 
 		int main = this.getResources().getIdentifier("main", "layout", this.getPackageName());
+
+		/*GEOSTART*/
 		int main_folder = this.getResources().getIdentifier("main_folder", "layout", this.getPackageName());
+		/*GEOSTART*/
 
 		int internal = this.getResources().getIdentifier("internal", "string", this.getPackageName());
 
@@ -64,6 +67,8 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 		int drawer_close = this.getResources().getIdentifier("drawer_close", "string", this.getPackageName());
 
 		Bundle extras = getIntent().getExtras();
+
+		/*GEOSTART*/
 		if (extras != null) {
 			if (extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS) != null) {
 				extensions = extras.getStringArrayList(Constants.KEY_FILTER_FILES_EXTENSIONS);
@@ -96,27 +101,7 @@ public class FileChooserActivity extends ListActivity implements OnItemClickList
 			setContentView(main);
 			Log.i("FILE CHOOSER", "extras null, View MAIN");
 		}
-
-		// if(extensions != null && extensions.contains(Constants.FOLDER)){
-		// 	setContentView(main_folder);
-		// 	Log.i("FILE CHOOSER", "result ok");
-		// }else{
-		// 	setContentView(main);
-		// }
-
-		//  Button button = (Button) findViewById(R.id.button_select);
-    //  button.setOnClickListener(new View.OnClickListener() {
-    //      public void onClick(View v) {
-    //          // Perform action on click
-		// 				 Intent intent = new Intent();
-		// 				 intent.putExtra(Constants.KEY_FILE_SELECTED,
-		// 						 currentFolder.getAbsolutePath());
-		// 				 setResult(Activity.RESULT_OK, intent);
-		// 				 Log.i("FILE CHOOSER", "result ok");
-		// 				 finish();
-    //      }
-    //  });
-
+		/*GEOSTART*/
 
 	  getActionBar().setDisplayHomeAsUpEnabled(true);
 	  getActionBar().setHomeButtonEnabled(true);

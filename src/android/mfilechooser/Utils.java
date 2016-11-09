@@ -5,21 +5,27 @@ import java.io.File;
 import android.content.Context;
 import android.os.Environment;
 
+import android.util.Log;
+
 import com.maginsoft.data.Category;
 
 public class Utils {
-	
+
+	private static final boolean LOG = true;
+
 	public static int getDepth(File file) {
 	      if (file.getParent() == null || new File(file.getParent()).getPath().equals(new File(file.getPath())))
 	          return 1;
 	      return 1 + getDepth(new File(file.getParent()));
 	}
-	   
+
 	public static Category getExternalStorage(Context context)
 	{
-		
+
+                if(LOG) Log.i("ionic 1", " getExternalStorage");
+
 		int external = context.getResources().getIdentifier("external", "string", context.getPackageName());
-		
+
 		File f = new File(getInternalStorage(context).path);
         File mDaddy = new File(f.getParent());
         int count = getDepth(mDaddy);
@@ -28,29 +34,33 @@ public class Utils {
             mDaddy = new File(mDaddy.getParent());
             count = getDepth(mDaddy);
         }
-        
+
         for (File kid : mDaddy.listFiles())
             if ((kid.getName().toLowerCase().indexOf("ext") > -1 || kid.getName().toLowerCase()
                     .indexOf("sdcard1") > -1)
                     && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
                     && kid.canRead()
                     && kid.canWrite()) {
-            	
+
+                if(LOG) Log.i("ionic 1", "1.kid.getName(): "+kid.getName());
             	Category kid2 = new Category();
             	kid2.path = kid.getAbsolutePath();
             	kid2.title = context.getString(external);
                 return kid2;
-            }
+        }else{
+                if(LOG) Log.i("ionic 1", "2.kid.getName(): "+kid.getName());
+        }
+
         if (new File("/Removable").exists())
             for (File kid : new File("/Removable").listFiles())
                 if (kid.getName().toLowerCase().indexOf("ext") > -1 && kid.canRead()
                         && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
                         && kid.list().length > 0) {
-                	
+
                 	Category kid2 = new Category();
                 	kid2.path = kid.getAbsolutePath();
                 	kid2.title = context.getString(external);
-                	
+
                     return kid2;
                 }
         /*if (!fallbackToInternal)
@@ -59,11 +69,11 @@ public class Utils {
            // return getInternalStorage();
         return null;
 	}
-	
+
 	public static Category getInternalStorage(Context context)
 	{
 		int internal = context.getResources().getIdentifier("internal", "string", context.getPackageName());
-		
+
 		File file = Environment.getExternalStorageDirectory();
 		if(file == null || file.exists() == false)
 		{
@@ -85,11 +95,11 @@ public class Utils {
             if (sdcard0 != null && sdcard0.exists())
                 file = sdcard0;
         }
-		
+
 		Category kid2 = new Category();
 		kid2.path = file.getAbsolutePath();
 		kid2.title = context.getString(internal);
-		
+
 		return kid2;
 	}
 }
