@@ -48,29 +48,28 @@ public class Utils {
                         return kid2;
                       }
 
-
-
-                        if (new File("/Removable").exists()){
-                                for (File kid : new File("/Removable").listFiles()){
-                                        if (kid.getName().toLowerCase().indexOf("ext") > -1 && kid.canRead()
-                                                && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
-                                                && kid.list().length > 0) {
-
-                                                Category kid2 = new Category();
-                                                kid2.path = kid.getAbsolutePath();
-                                                kid2.title = context.getString(external);
-
-                                            return kid2;
-                                        }
-                                }
-
-                        }
-
                 /*if (!fallbackToInternal)
                     return null;
                 else*/
                    // return getInternalStorage();
                 }
+
+                if (new File("/Removable").exists()){
+                        for (File kid : new File("/Removable").listFiles()){
+                                if (kid.getName().toLowerCase().indexOf("ext") > -1 && kid.canRead()
+                                        && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
+                                        && kid.list().length > 0) {
+
+                                        Category kid2 = new Category();
+                                        kid2.path = kid.getAbsolutePath();
+                                        kid2.title = context.getString(external);
+
+                                    return kid2;
+                                }
+                        }
+
+                }
+
                 return null;
 	}
 
