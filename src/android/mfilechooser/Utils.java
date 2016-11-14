@@ -45,8 +45,6 @@ public class Utils {
             	kid2.path = kid.getAbsolutePath();
             	kid2.title = context.getString(external);
                 return kid2;
-        }else if(){
-
         }
 
 
