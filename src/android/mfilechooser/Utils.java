@@ -49,10 +49,7 @@ public class Utils {
                     	kid2.path = kid.getAbsolutePath();
                     	kid2.title = context.getString(external);
                         return kid2;
-                }else if(isSdCard(kid.getName())
-                                && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
-                                && kid.canRead()
-                                && kid.canWrite()) {
+                }else if(isSdCard(kid.getName())) {
                     if(LOG) Log.i("ionic 1", "issdcard true: "+kid.getName());
                     Category kid2 = new Category();
                     kid2.path = kid.getAbsolutePath();
