@@ -14,7 +14,7 @@ import com.maginsoft.data.Category;
 
 public class Utils {
 
-	private static final boolean LOG = true;
+	private static final boolean LOG = false;
 
 	public static int getDepth(File file) {
 	      if (file.getParent() == null || new File(file.getParent()).getPath().equals(new File(file.getPath())))
