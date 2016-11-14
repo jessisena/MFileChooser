@@ -86,7 +86,7 @@ public class Utils {
 	}
 
 
-                private static boolean isSdCard(name){
+                private static boolean isSdCard(String name){
                  Pattern p = Pattern.compile("[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}");
                  Matcher m = p.matcher(name);
                  return m.matches();
