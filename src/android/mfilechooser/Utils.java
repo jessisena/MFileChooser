@@ -25,47 +25,53 @@ public class Utils {
 		int external = context.getResources().getIdentifier("external", "string", context.getPackageName());
 
 		File f = new File(getInternalStorage(context).path);
-        File mDaddy = new File(f.getParent());
-        int count = getDepth(mDaddy);
-        while(count > 2)
-        {
-            mDaddy = new File(mDaddy.getParent());
-            count = getDepth(mDaddy);
-        }
-
-        for (File kid : mDaddy.listFiles())
-            if(LOG) Log.i("ionic 1", "1.kid.getName(): "+kid.getName());
-            if ((kid.getName().toLowerCase().indexOf("ext") > -1 || kid.getName().toLowerCase()
-                    .indexOf("sdcard1") > -1)
-                    && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
-                    && kid.canRead()
-                    && kid.canWrite()) {
-
-            	Category kid2 = new Category();
-            	kid2.path = kid.getAbsolutePath();
-            	kid2.title = context.getString(external);
-                return kid2;
-        }
-
-
-
-        if (new File("/Removable").exists())
-            for (File kid : new File("/Removable").listFiles())
-                if (kid.getName().toLowerCase().indexOf("ext") > -1 && kid.canRead()
-                        && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
-                        && kid.list().length > 0) {
-
-                	Category kid2 = new Category();
-                	kid2.path = kid.getAbsolutePath();
-                	kid2.title = context.getString(external);
-
-                    return kid2;
+                File mDaddy = new File(f.getParent());
+                int count = getDepth(mDaddy);
+                while(count > 2){
+                    mDaddy = new File(mDaddy.getParent());
+                    count = getDepth(mDaddy);
                 }
-        /*if (!fallbackToInternal)
-            return null;
-        else*/
-           // return getInternalStorage();
-        return null;
+
+                for (File kid : mDaddy.listFiles()){
+
+                    if(LOG) Log.i("ionic 1", "1.kid.getName(): "+kid.getName());
+
+                    if ((kid.getName().toLowerCase().indexOf("ext") > -1 || kid.getName().toLowerCase()
+                            .indexOf("sdcard1") > -1)
+                            && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
+                            && kid.canRead()
+                            && kid.canWrite()) {
+
+                    	Category kid2 = new Category();
+                    	kid2.path = kid.getAbsolutePath();
+                    	kid2.title = context.getString(external);
+                        return kid2;
+                      }
+
+
+
+                        if (new File("/Removable").exists()){
+                                for (File kid : new File("/Removable").listFiles()){
+                                        if (kid.getName().toLowerCase().indexOf("ext") > -1 && kid.canRead()
+                                                && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
+                                                && kid.list().length > 0) {
+
+                                                Category kid2 = new Category();
+                                                kid2.path = kid.getAbsolutePath();
+                                                kid2.title = context.getString(external);
+
+                                            return kid2;
+                                        }
+                                }
+
+                        }
+
+                /*if (!fallbackToInternal)
+                    return null;
+                else*/
+                   // return getInternalStorage();
+                }
+                return null;
 	}
 
 
