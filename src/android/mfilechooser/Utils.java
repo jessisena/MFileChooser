@@ -2,6 +2,9 @@ package com.maginsoft.utils;
 
 import java.io.File;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.content.Context;
 import android.os.Environment;
 
@@ -46,7 +49,16 @@ public class Utils {
                     	kid2.path = kid.getAbsolutePath();
                     	kid2.title = context.getString(external);
                         return kid2;
-                      }
+                }else if(isSdCard(kid.getName())
+                                && !kid.getPath().equals(new File(getInternalStorage(context).path).getPath())
+                                && kid.canRead()
+                                && kid.canWrite()) {
+                    if(LOG) Log.i("ionic 1", "issdcard true: "+kid.getName());
+                    Category kid2 = new Category();
+                    kid2.path = kid.getAbsolutePath();
+                    kid2.title = context.getString(external);
+                    return kid2;
+                 }
 
                 /*if (!fallbackToInternal)
                     return null;
@@ -73,6 +85,12 @@ public class Utils {
                 return null;
 	}
 
+
+                private boolean isSdCard(name){
+                 Pattern p = Pattern.compile("[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}");
+                 Matcher m = p.matcher(name);
+                 return m.matches();
+                }
 
 	public static Category getExternalStorage2(Context context)
 	{
