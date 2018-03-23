@@ -1,0 +1,36 @@
+{
+  "name": "MFileChooser",
+  "version": "0.1.0",
+  "description": "Clipboard management plugin for Cordova/PhoneGap",
+  "cordova": {
+    "id": "com.maginsoft.mfilechooser",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessisena/MFileChooser.git"
+  },
+  "keywords": [
+    "cordova",
+    "filechooser",
+    "filepicker",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jessisena/MFileChooser/issues"
+  },
+  "homepage": "https://github.com/jessisena/MFileChooser#readme"
+}
